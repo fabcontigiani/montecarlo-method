@@ -3,7 +3,8 @@ from carta import Carta
 from jugador import Jugador
 from envido import envido
 
-ITERACIONES = 3
+ITERACIONES = 1
+PUNTOS_PARA_GANAR = 15
 
 jugador1 = Jugador()
 jugador2 = Jugador()
@@ -15,7 +16,7 @@ for i in range(ITERACIONES):
     jugador1.puntos = 0
     jugador2.puntos = 0
 
-    while jugador1.puntos < 30 and jugador2.puntos <30:
+    while jugador1.puntos < PUNTOS_PARA_GANAR and jugador2.puntos < PUNTOS_PARA_GANAR:
         # Se mezclan las cartas
         mazo = []
         for numero in (1,2,3,4,5,6,7,10,11,12):
@@ -43,6 +44,7 @@ for i in range(ITERACIONES):
             # juega jugador 1
             siguienteMano = 1
             if jugador1.decidirEnvido():
+                print(f"Jugador 1: Envido ({jugador1.tantos} tantos)")
                 envido(jugador1,jugador2)
             
             
@@ -51,9 +53,10 @@ for i in range(ITERACIONES):
             # juega jugador 2
             siguienteMano = 0
             if jugador2.decidirEnvido():
+                print(f"Jugador 2: Envido ({jugador2.tantos} tantos)")
                 envido(jugador2,jugador1)
 
-    if jugador1.puntos >= 30:
+    if jugador1.puntos >= PUNTOS_PARA_GANAR:
         print("Jugador 1 gana.")
     else:
         print("Jugador 2 gana.")

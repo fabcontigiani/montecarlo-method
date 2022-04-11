@@ -1,8 +1,9 @@
+import random
 from jugador import Jugador
 
 def envido(quienCanta: Jugador, quienResponde:Jugador):
-    if quienResponde.tantos >= 27: # Quien responde dice 'Quiero'
-        
+    # if quienResponde.tantos >= 27: # Quien responde dice 'Quiero'
+    if random.random() >= quienResponde.probabilidadEnvido[quienResponde.tantos]: # Quien responde dice 'Quiero'
         quienResponde.tantosRival = quienCanta.tantos # Quien canta dice sus tantos
         
         if quienResponde.tantos > quienResponde.tantosRival: # Quien responde tiene mas tantos
