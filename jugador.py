@@ -27,11 +27,11 @@ class Jugador:
     }
 
     probabilidadTruco = {}
-    probabilidadTruco[28] = 1
-    j = 1.
+    j = 0.
     for i in range(2,28):
         probabilidadTruco[i] = j
-        j -= 0.04
+        j += 0.04
+    probabilidadTruco[28] = 1
 
     def __init__(self) -> None:
         self.puntos = 0

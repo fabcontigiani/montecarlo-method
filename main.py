@@ -4,7 +4,7 @@ from jugador import Jugador
 from envido import envido
 
 ITERACIONES = 10_000
-PUNTOS_PARA_GANAR = 15
+PUNTOS_PARA_GANAR = 30
 
 jugador1 = Jugador()
 jugador2 = Jugador()
@@ -39,9 +39,17 @@ for k in range(ITERACIONES):
         jugador1.manosGanadas = 0
         jugador2.manosGanadas = 0
 
-        for j in range(3): # Se reparten 3 cartas
-            jugador1.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
-            jugador2.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+        # for j in range(3): # Se reparten 3 cartas
+        #     jugador1.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+        #     jugador2.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+        if esMano == 1:
+            for j in range(3): # Se reparten 3 cartas
+                jugador1.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+                jugador2.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+        else:
+            for j in range(3): # Se reparten 3 cartas
+                jugador2.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+                jugador1.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
         jugador1.calcular_tanto()
         jugador1.mano.sort()
         jugador2.calcular_tanto()
@@ -152,13 +160,17 @@ for k in range(ITERACIONES):
             esMano = 1
             turno = 1
 
-    if jugador1.puntos >= PUNTOS_PARA_GANAR:
+    if jugador1.puntos >= PUNTOS_PARA_GANAR and jugador1.puntos > jugador2.puntos:
         # print("Victoria Jugador 1")
         victoriasJ1 += 1
-    else: 
+    elif jugador2.puntos >= PUNTOS_PARA_GANAR and jugador2.puntos > jugador1.puntos:
         # print("Victoria Jugador 2")
         victoriasJ2 += 1
+    else:
+        victoriasJ1 += 0.5
+        victoriasJ2 += 0.5
+
 
 print(f"Iteraciones: {ITERACIONES}")
-print(f"% victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100}%")
-print(f"% victoria Jugador 2: {(victoriasJ2/ITERACIONES)*100}%")
+print(f"% victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100:.2f}%")
+print(f"% victoria Jugador 2: {(victoriasJ2/ITERACIONES)*100:.2f}%")
