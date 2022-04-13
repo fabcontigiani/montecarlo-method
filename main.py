@@ -70,6 +70,7 @@ for i in range(ITERACIONES):
         for i in range(3):
             if turno == 1:
                 if jugador1.decidirTruco():
+                    # TODO cambiar a respondeEnvido()
                     if jugador2.decidirEnvido():
                         trucoQuerido = True
                     else:
@@ -78,6 +79,7 @@ for i in range(ITERACIONES):
                 cartasJugadasPorJ1.append(jugador1.jugarCarta())
                 
                 if jugador2.decidirTruco():
+                    # TODO cambiar a respondeEnvido()
                     if jugador1.decidirTruco():
                         trucoQuerido = True
                     else:
@@ -86,6 +88,7 @@ for i in range(ITERACIONES):
                 cartasJugadasPorJ2.append(jugador2.jugarCarta(cartaRival = cartasJugadasPorJ1[i]))
             else:
                 if jugador2.decidirTruco():
+                    # TODO cambiar a respondeEnvido()
                     if jugador1.decidirEnvido():
                         trucoQuerido = True
                     else:
@@ -94,6 +97,7 @@ for i in range(ITERACIONES):
                 cartasJugadasPorJ2.append(jugador2.jugarCarta())
                 
                 if jugador1.decidirTruco():
+                    # TODO cambiar a respondeEnvido()
                     if jugador2.decidirTruco():
                         trucoQuerido = True
                     else:
