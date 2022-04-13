@@ -4,7 +4,7 @@ from jugador import Jugador
 from envido import envido
 
 ITERACIONES = 10_000
-PUNTOS_PARA_GANAR = 30
+PUNTOS_PARA_GANAR = 15
 
 jugador1 = Jugador()
 jugador2 = Jugador()
@@ -67,13 +67,12 @@ for k in range(ITERACIONES):
         #         envido(jugador1,jugador2)
 
         if esMano == 1:
-            if jugador1.decidirEnvido():
-                # print(f"Jugador 1: Envido ({jugador1.tantos} tantos)")
-                envido(jugador1,jugador2)
+            envido(jugador1,jugador2)
         else:
             if jugador2.decidirEnvido():
-                # print(f"Jugador 2: Envido ({jugador2.tantos} tantos)")
                 envido(jugador2,jugador1)
+            else:
+                envido(jugador1,jugador2)
 
         for i in range(3):
             if turno == 1:
