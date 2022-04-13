@@ -2,7 +2,6 @@ import random
 from carta import Carta
 from jugador import Jugador
 from envido import envido
-from truco import truco
 
 ITERACIONES = 100
 PUNTOS_PARA_GANAR = 15
@@ -155,10 +154,10 @@ for k in range(ITERACIONES):
         turno = 1
 
     if jugador1.puntos >= PUNTOS_PARA_GANAR:
-        print("Victoria Jugador 1")
+        # print("Victoria Jugador 1")
         victoriasJ1 += 1
     else: 
-        print("Victoria Jugador 2")
+        # print("Victoria Jugador 2")
         victoriasJ2 += 1
 
 print(f"Iteraciones: {ITERACIONES}")

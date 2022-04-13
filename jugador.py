@@ -67,9 +67,6 @@ class Jugador:
             return True
         return False
 
-    def responderEnvido(self):
-        return self.decidirEnvido()
-
     def decidirTruco(self):
         pass
 
