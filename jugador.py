@@ -31,6 +31,7 @@ class Jugador:
         self.mano = []
         self.tantos = 0
         self.tantosRival = None
+        self.manosGanadas = 0
 
     def calcular_tanto(self):
         mismoPalo = False
@@ -68,3 +69,28 @@ class Jugador:
         if random.random() >= self.probabilidadEnvido[self.tantos]:
             return True
         return False
+
+    def decidirTruco(self):
+        pass
+
+    def jugarCarta(self, cartaRival = None):
+        if cartaRival != None:
+            cartaQueMata = None
+            for carta in self.mano:
+                # TODO agregar situacion parda
+                if carta.valorTruco > cartaRival.valorTruco:
+                    cartaQueMata = carta
+                    break
+            
+            if cartaQueMata != None:
+                self.mano.remove(cartaQueMata)
+                # print(cartaQueMata)
+                return cartaQueMata
+            else:
+                menorCarta = self.mano.pop(0)
+                # print(menorCarta)
+                return menorCarta
+        else:
+            mayorCarta = self.mano.pop()
+            # print(mayorCarta)
+            return mayorCarta

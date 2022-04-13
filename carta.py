@@ -47,6 +47,31 @@ class Carta:
         self.palo = palo
         self.valorTruco = valoresTruco[self.__str__()]
 
+    def __lt__(self,other):
+        if self.valorTruco < other.valorTruco:
+            return True
+        return False
+
+    def __gt__(self,other):
+        if self.valorTruco > other.valorTruco:
+            return True
+        return False
+
+    # def __le__(self,other):
+    #     if self.valorTruco <= other.valorTruco:
+    #         return True
+    #     return False
+
+    # def __ge__(self,other):
+    #     if self.valorTruco >= other.valorTruco:
+    #         return True
+    #     return False
+
+    # def __eq__(self,other):
+    #     if self.valorTruco == other.valorTruco:
+    #         return True
+    #     return False
+
     def mata(self, carta1):
         if self.valorTruco > carta1.valorTruco:
             return True
