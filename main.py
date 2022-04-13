@@ -19,7 +19,7 @@ if esMano == 1:
 else:
     turno = 2
 
-for i in range(ITERACIONES):
+for k in range(ITERACIONES):
     jugador1.puntos = 0
     jugador2.puntos = 0
 
@@ -38,10 +38,12 @@ for i in range(ITERACIONES):
         trucoQuerido = False
         cartasJugadasPorJ1 = []
         cartasJugadasPorJ2 = []
+        jugador1.manosGanadas = 0
+        jugador2.manosGanadas = 0
 
-        for i in range(3): # Se reparten 3 cartas
-            jugador1.mano.append(mazo.pop(random.randint(0,len(mazo)-1)))
-            jugador2.mano.append(mazo.pop(random.randint(0,len(mazo)-1)))
+        for j in range(3): # Se reparten 3 cartas
+            jugador1.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
+            jugador2.mano.append(mazo.pop(random.randint(0, len(mazo)-1)))
         jugador1.calcular_tanto()
         jugador1.mano.sort()
         jugador2.calcular_tanto()
@@ -64,23 +66,21 @@ for i in range(ITERACIONES):
                 envido(jugador1,jugador2)
         else:
             if jugador2.decidirEnvido():
-                # print(f"Jugador 1: Envido ({jugador1.tantos} tantos)")
+                # print(f"Jugador 2: Envido ({jugador2.tantos} tantos)")
                 envido(jugador2,jugador1)
-        
+
         for i in range(3):
             if turno == 1:
                 if jugador1.decidirTruco():
-                    # TODO cambiar a respondeEnvido()
-                    if jugador2.decidirEnvido():
+                    if jugador2.responderEnvido():
                         trucoQuerido = True
                     else:
                         jugador1.puntos += 1
                         break
                 cartasJugadasPorJ1.append(jugador1.jugarCarta())
-                
+
                 if jugador2.decidirTruco():
-                    # TODO cambiar a respondeEnvido()
-                    if jugador1.decidirTruco():
+                    if jugador1.responderEnvido():
                         trucoQuerido = True
                     else:
                         jugador2.puntos += 1
@@ -88,22 +88,20 @@ for i in range(ITERACIONES):
                 cartasJugadasPorJ2.append(jugador2.jugarCarta(cartaRival = cartasJugadasPorJ1[i]))
             else:
                 if jugador2.decidirTruco():
-                    # TODO cambiar a respondeEnvido()
-                    if jugador1.decidirEnvido():
+                    if jugador1.responderEnvido():
                         trucoQuerido = True
                     else:
                         jugador2.puntos += 1
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta())
-                
+
                 if jugador1.decidirTruco():
-                    # TODO cambiar a respondeEnvido()
-                    if jugador2.decidirTruco():
+                    if jugador2.responderEnvido():
                         trucoQuerido = True
                     else:
                         jugador1.puntos += 1
                         break
-                cartasJugadasPorJ1.append(jugador1.jugarCarta(cartaRival = cartasJugadasPorJ2[i]))
+                cartasJugadasPorJ1.append(jugador1.jugarCarta(cartaRival=cartasJugadasPorJ2[i]))
 
             # print(cartasJugadasPorJ1)
             # print(cartasJugadasPorJ2)
@@ -126,13 +124,13 @@ for i in range(ITERACIONES):
                 jugador1.puntos += 2
             else:
                 jugador1.puntos += 1
-        
+
         if jugador2.manosGanadas == 2 and jugador1.manosGanadas != jugador2.manosGanadas:
             if trucoQuerido:
                 jugador2.puntos += 2
             else:
                 jugador2.puntos += 1
-        
+
         # Situacion triple parda
         if jugador1.manosGanadas == jugador2.manosGanadas == 3:
             if esMano == 1:
@@ -145,7 +143,7 @@ for i in range(ITERACIONES):
                     jugador2.puntos += 2
                 else:
                     jugador2.puntos += 1
-        
+
         # print(f"Puntos J1: {jugador1.puntos}")
         # print(f"Puntos J2: {jugador2.puntos}")
 
@@ -154,13 +152,15 @@ for i in range(ITERACIONES):
         turno = 2
     else:
         esMano = 1
-        turno = 1 
+        turno = 1
 
     if jugador1.puntos >= PUNTOS_PARA_GANAR:
+        print("Victoria Jugador 1")
         victoriasJ1 += 1
-    else:
+    else: 
+        print("Victoria Jugador 2")
         victoriasJ2 += 1
-    
+
 print(f"Iteraciones: {ITERACIONES}")
 print(f"% victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100}%")
 print(f"% victoria Jugador 2: {(victoriasJ2/ITERACIONES)*100}%")

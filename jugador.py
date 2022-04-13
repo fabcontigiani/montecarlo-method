@@ -1,7 +1,7 @@
 import random
 
 class Jugador:
-    probabilidadEnvido =  {
+    probabilidadEnvido = {
         33 : 0.99,
         32 : 0.95,
         31 : 0.91,
@@ -61,11 +61,14 @@ class Jugador:
             for carta in self.mano:
                 if carta.numero > self.tantos and carta.numero not in (10,11,12):
                     self.tantos = carta.numero
-        
+
     def decidirEnvido(self):
-        if random.random() <= self.probabilidadEnvido[self.tantos]:
-            return True
-        return False
+        if random.random() >= self.probabilidadEnvido[self.tantos]:
+            return False
+        return True
+
+    def responderEnvido(self):
+        return self.decidirEnvido()
 
     def decidirTruco(self):
         pass
@@ -78,7 +81,7 @@ class Jugador:
                 if carta.valorTruco > cartaRival.valorTruco:
                     cartaQueMata = carta
                     break
-            
+
             if cartaQueMata != None:
                 self.mano.remove(cartaQueMata)
                 # print(cartaQueMata)
@@ -92,10 +95,12 @@ class Jugador:
             # print(mayorCarta)
             return mayorCarta
 
+
 class JugadorCaso1(Jugador):
-    def decidirEnvido(self):
+    def responderEnvido(self):
         return False
 
+
 class JugadorCaso2(Jugador):
-    def decidirEnvido(self):
+    def responderEnvido(self):
         return True
