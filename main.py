@@ -72,7 +72,7 @@ for k in range(ITERACIONES):
         for i in range(3):
             if turno == 1:
                 if jugador1.decidirTruco():
-                    if jugador2.responderEnvido():
+                    if jugador2.decidirTruco():
                         trucoQuerido = True
                     else:
                         jugador1.puntos += 1
@@ -80,7 +80,7 @@ for k in range(ITERACIONES):
                 cartasJugadasPorJ1.append(jugador1.jugarCarta())
 
                 if jugador2.decidirTruco():
-                    if jugador1.responderEnvido():
+                    if jugador1.decidirTruco():
                         trucoQuerido = True
                     else:
                         jugador2.puntos += 1
@@ -88,7 +88,7 @@ for k in range(ITERACIONES):
                 cartasJugadasPorJ2.append(jugador2.jugarCarta(cartaRival = cartasJugadasPorJ1[i]))
             else:
                 if jugador2.decidirTruco():
-                    if jugador1.responderEnvido():
+                    if jugador1.decidirTruco():
                         trucoQuerido = True
                     else:
                         jugador2.puntos += 1
@@ -96,7 +96,7 @@ for k in range(ITERACIONES):
                 cartasJugadasPorJ2.append(jugador2.jugarCarta())
 
                 if jugador1.decidirTruco():
-                    if jugador2.responderEnvido():
+                    if jugador2.decidirTruco():
                         trucoQuerido = True
                     else:
                         jugador1.puntos += 1

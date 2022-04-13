@@ -63,9 +63,9 @@ class Jugador:
                     self.tantos = carta.numero
 
     def decidirEnvido(self):
-        if random.random() >= self.probabilidadEnvido[self.tantos]:
-            return False
-        return True
+        if random.random() <= self.probabilidadEnvido[self.tantos]:
+            return True
+        return False
 
     def responderEnvido(self):
         return self.decidirEnvido()
@@ -94,13 +94,3 @@ class Jugador:
             mayorCarta = self.mano.pop()
             # print(mayorCarta)
             return mayorCarta
-
-
-class JugadorCaso1(Jugador):
-    def responderEnvido(self):
-        return False
-
-
-class JugadorCaso2(Jugador):
-    def responderEnvido(self):
-        return True
