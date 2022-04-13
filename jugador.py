@@ -74,7 +74,7 @@ class Jugador:
             return True
         return False
 
-    def decidirTruco(self, manosGanadasRival, cartasJugadasRival):
+    def decidirTruco(self, cartasJugadasRival):
         if len(self.mano) == 3: # Primera ronda
             if cartasJugadasRival == []: # Rival no ha jugado carta aun
                 # Sumamos el valorTruco de las dos cartas mas altas (mano ya ordenado)

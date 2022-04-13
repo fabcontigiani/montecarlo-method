@@ -29,7 +29,6 @@ for k in range(ITERACIONES):
             for palo in ("Espada","Basto","Oro","Copa"):
                 mazo.append(Carta(numero,palo))
 
-        # Se reparte
         jugador1.mano = []
         jugador1.tantos = 0
         jugador2.mano = []
@@ -70,32 +69,32 @@ for k in range(ITERACIONES):
 
         for i in range(3):
             if turno == 1:
-                if jugador1.decidirTruco(jugador2.manosGanadas, cartasJugadasPorJ2):
-                    if jugador2.decidirTruco(jugador1.manosGanadas, cartasJugadasPorJ1):
+                if jugador1.decidirTruco(cartasJugadasPorJ2):
+                    if jugador2.decidirTruco(cartasJugadasPorJ1):
                         trucoQuerido = True
                     else:
                         jugador1.puntos += 1
                         break
                 cartasJugadasPorJ1.append(jugador1.jugarCarta())
 
-                if jugador2.decidirTruco(jugador1.manosGanadas, cartasJugadasPorJ1):
-                    if jugador1.decidirTruco(jugador2.manosGanadas, cartasJugadasPorJ2):
+                if jugador2.decidirTruco(cartasJugadasPorJ1):
+                    if jugador1.decidirTruco(cartasJugadasPorJ2):
                         trucoQuerido = True
                     else:
                         jugador2.puntos += 1
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta(cartaRival = cartasJugadasPorJ1[i]))
             else:
-                if jugador2.decidirTruco(jugador1.manosGanadas, cartasJugadasPorJ1):
-                    if jugador1.decidirTruco(jugador2.manosGanadas, cartasJugadasPorJ2):
+                if jugador2.decidirTruco(cartasJugadasPorJ1):
+                    if jugador1.decidirTruco(cartasJugadasPorJ2):
                         trucoQuerido = True
                     else:
                         jugador2.puntos += 1
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta())
 
-                if jugador1.decidirTruco(jugador2.manosGanadas, cartasJugadasPorJ2):
-                    if jugador2.decidirTruco(jugador1.manosGanadas, cartasJugadasPorJ1):
+                if jugador1.decidirTruco(cartasJugadasPorJ2):
+                    if jugador2.decidirTruco(cartasJugadasPorJ1):
                         trucoQuerido = True
                     else:
                         jugador1.puntos += 1
@@ -146,12 +145,12 @@ for k in range(ITERACIONES):
         # print(f"Puntos J1: {jugador1.puntos}")
         # print(f"Puntos J2: {jugador2.puntos}")
 
-    if esMano == 1:
-        esMano = 2
-        turno = 2
-    else:
-        esMano = 1
-        turno = 1
+        if esMano == 1:
+            esMano = 2
+            turno = 2
+        else:
+            esMano = 1
+            turno = 1
 
     if jugador1.puntos >= PUNTOS_PARA_GANAR:
         # print("Victoria Jugador 1")
