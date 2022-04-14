@@ -1,10 +1,12 @@
 import random
+import time
 from carta import Carta
 from jugador import Jugador
 from envido import envido
-
+f= open("datos3.txt","a+")
 ITERACIONES = 10_000
-PUNTOS_PARA_GANAR = 15
+PUNTOS_PARA_GANAR = 30
+start_time = time.time()
 
 jugador1 = Jugador()
 jugador2 = Jugador()
@@ -18,10 +20,14 @@ if esMano == 1:
 else:
     turno = 2
 
+Partidas = []
+Partida = 0
+
 for k in range(ITERACIONES):
     jugador1.puntos = 0
     jugador2.puntos = 0
-
+    Partidas.append(Partida)
+    Partida = 0
     while jugador1.puntos < PUNTOS_PARA_GANAR and jugador2.puntos < PUNTOS_PARA_GANAR:
         # Se mezclan las cartas
         mazo = []
@@ -110,7 +116,7 @@ for k in range(ITERACIONES):
 
         for i in range(3):
             if turno == 1:
-                if jugador1.decidirTruco(cartasJugadasPorJ2):
+                if jugador1.decidirTruco(cartasJugadasPorJ2) and not trucoQuerido:
                     if jugador2.decidirTruco(cartasJugadasPorJ1):
                         trucoQuerido = True
                     else:
@@ -118,7 +124,7 @@ for k in range(ITERACIONES):
                         break
                 cartasJugadasPorJ1.append(jugador1.jugarCarta())
 
-                if jugador2.decidirTruco(cartasJugadasPorJ1):
+                if jugador2.decidirTruco(cartasJugadasPorJ1) and not trucoQuerido:
                     if jugador1.decidirTruco(cartasJugadasPorJ2):
                         trucoQuerido = True
                     else:
@@ -126,7 +132,7 @@ for k in range(ITERACIONES):
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta(cartaRival = cartasJugadasPorJ1[i]))
             else:
-                if jugador2.decidirTruco(cartasJugadasPorJ1):
+                if jugador2.decidirTruco(cartasJugadasPorJ1) and not trucoQuerido:
                     if jugador1.decidirTruco(cartasJugadasPorJ2):
                         trucoQuerido = True
                     else:
@@ -134,7 +140,7 @@ for k in range(ITERACIONES):
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta())
 
-                if jugador1.decidirTruco(cartasJugadasPorJ2):
+                if jugador1.decidirTruco(cartasJugadasPorJ2) and not trucoQuerido:
                     if jugador2.decidirTruco(cartasJugadasPorJ1):
                         trucoQuerido = True
                     else:
@@ -185,13 +191,14 @@ for k in range(ITERACIONES):
 
         # print(f"Puntos J1: {jugador1.puntos}")
         # print(f"Puntos J2: {jugador2.puntos}")
-
+        Partida +=1
         if esMano == 1:
             esMano = 2
             turno = 2
         else:
             esMano = 1
             turno = 1
+        
 
     if jugador1.puntos >= PUNTOS_PARA_GANAR and jugador1.puntos > jugador2.puntos:
         # print("Victoria Jugador 1")
@@ -202,8 +209,17 @@ for k in range(ITERACIONES):
     else:
         victoriasJ1 += 0.5
         victoriasJ2 += 0.5
-
-
+    
+Q=0
+for P in Partidas:
+    Q +=P
+PartidaMedia = Q/ITERACIONES
+print(f"Cantidad promedio de rondas por partida:")
 print(f"Iteraciones: {ITERACIONES}")
 print(f"% victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100:.2f}%")
 print(f"% victoria Jugador 2: {(victoriasJ2/ITERACIONES)*100:.2f}%")
+print("--- %s seconds ---" % (time.time() - start_time))
+
+f.write("ITERACIONES: %d " % ITERACIONES)
+f.write(f"Victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100:.2f}% \n")
+f.close()

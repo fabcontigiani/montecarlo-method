@@ -3,7 +3,7 @@ import time
 from carta import Carta
 from jugador import Jugador
 from envido import envido
-f= open("datos.txt","a+")
+f= open("datosTest.txt","a+")
 ITERACIONES = 10_000
 PUNTOS_PARA_GANAR = 30
 start_time = time.time()
