@@ -1,11 +1,12 @@
 import random
+from re import L
 import time
 from carta import Carta
 from jugador import Jugador
 from envido import envido
-
-ITERACIONES = 10_000
-PUNTOS_PARA_GANAR = 15
+f= open("Datos.txt","a+")
+ITERACIONES = 10_00
+PUNTOS_PARA_GANAR = 30
 start_time = time.time()
 
 jugador1 = Jugador()
@@ -195,3 +196,7 @@ print(f"Iteraciones: {ITERACIONES}")
 print(f"% victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100:.2f}%")
 print(f"% victoria Jugador 2: {(victoriasJ2/ITERACIONES)*100:.2f}%")
 print("--- %s seconds ---" % (time.time() - start_time))
+
+f.write("ITERACIONES: %d " % ITERACIONES)
+f.write(f"Victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100:.2f}% \n")
+f.close()
