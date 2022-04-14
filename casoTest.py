@@ -4,7 +4,7 @@ from carta import Carta
 from jugador import Jugador
 from envido import envido
 
-ITERACIONES = 10_0
+ITERACIONES = 10_000
 PUNTOS_PARA_GANAR = 15
 start_time = time.time()
 
@@ -92,7 +92,7 @@ for k in range(ITERACIONES):
 
         for i in range(3):
             if turno == 1:
-                if jugador1.decidirTruco(cartasJugadasPorJ2):
+                if jugador1.decidirTruco(cartasJugadasPorJ2) and not trucoQuerido:
                     if jugador2.decidirTruco(cartasJugadasPorJ1):
                         trucoQuerido = True
                     else:
@@ -100,7 +100,7 @@ for k in range(ITERACIONES):
                         break
                 cartasJugadasPorJ1.append(jugador1.jugarCarta())
 
-                if jugador2.decidirTruco(cartasJugadasPorJ1):
+                if jugador2.decidirTruco(cartasJugadasPorJ1) and not trucoQuerido:
                     if jugador1.decidirTruco(cartasJugadasPorJ2):
                         trucoQuerido = True
                     else:
@@ -108,7 +108,7 @@ for k in range(ITERACIONES):
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta(cartaRival = cartasJugadasPorJ1[i]))
             else:
-                if jugador2.decidirTruco(cartasJugadasPorJ1):
+                if jugador2.decidirTruco(cartasJugadasPorJ1) and not trucoQuerido:
                     if jugador1.decidirTruco(cartasJugadasPorJ2):
                         trucoQuerido = True
                     else:
@@ -116,7 +116,7 @@ for k in range(ITERACIONES):
                         break
                 cartasJugadasPorJ2.append(jugador2.jugarCarta())
 
-                if jugador1.decidirTruco(cartasJugadasPorJ2):
+                if jugador1.decidirTruco(cartasJugadasPorJ2) and not trucoQuerido:
                     if jugador2.decidirTruco(cartasJugadasPorJ1):
                         trucoQuerido = True
                     else:
