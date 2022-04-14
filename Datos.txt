@@ -1,4 +1,0 @@
-ITERACIONES: 1000 Victoria Jugador 1: 50.35% 
-ITERACIONES: 1000 Victoria Jugador 1: 50.80% 
-ITERACIONES: 1000 Victoria Jugador 1: 49.45% 
-ITERACIONES: 1000 Victoria Jugador 1: 50.35% 
