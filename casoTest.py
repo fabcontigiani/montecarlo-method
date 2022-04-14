@@ -1,11 +1,10 @@
 import random
-from re import L
 import time
 from carta import Carta
 from jugador import Jugador
 from envido import envido
-f= open("Datos.txt","a+")
-ITERACIONES = 10_00
+f= open("datos.txt","a+")
+ITERACIONES = 10_000
 PUNTOS_PARA_GANAR = 30
 start_time = time.time()
 
@@ -191,7 +190,7 @@ Q=0
 for P in Partidas:
     Q +=P
 PartidaMedia = Q/ITERACIONES
-print(f"Media de las Partidas: {PartidaMedia}")
+print(f"Cantidad promedio de rondas por partida:")
 print(f"Iteraciones: {ITERACIONES}")
 print(f"% victoria Jugador 1: {(victoriasJ1/ITERACIONES)*100:.2f}%")
 print(f"% victoria Jugador 2: {(victoriasJ2/ITERACIONES)*100:.2f}%")
